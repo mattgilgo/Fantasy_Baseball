@@ -1,0 +1,23 @@
+12 teams
+1 C 
+1 1B
+1 2B
+1 SS
+1 3B
+3 OF
+2 Util
+2 SP
+2 RP
+4 P
+5 BN
+3 IL
+
+So I need to list...
+Top 20 C
+Top 25 1B
+Top 25 2B
+Top 25 SS
+Top 25 3B
+Top 60 OF
+Top 75 SP
+Top 75 RP
