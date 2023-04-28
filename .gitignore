@@ -128,8 +128,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# csvs
-*.csv
+# ignore all directories with the name data
+data/
+
+
+
 
 # html
 *.html

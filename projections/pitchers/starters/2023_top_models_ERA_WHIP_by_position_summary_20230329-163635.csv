@@ -1,0 +1,2 @@
+,Model Name,Mean Square Error,Mean Absolute Error,R2 Score
+7,MLPRegressor,0.43027038918267835,0.43027038918267835,0.6766357206972349
