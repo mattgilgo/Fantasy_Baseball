@@ -136,3 +136,10 @@ data/
 
 # html
 *.html
+
+# csv
+*.csv
+
+# notebooks
+*.ipynb
+.DS_Store
