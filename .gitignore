@@ -131,14 +131,23 @@ dmypy.json
 # ignore all directories with the name data
 data/
 
+# ignore all directories with the name data
+savant/
 
+# ignore all directories with the name data
+list_of_minimums_for_columns/
 
+# ignore all directories with the name data
+draft_adp/
+
+# ignore all directories with the name data
+savant_predictions/2024/batters/
+
+# ignore all directories with the name data
+savant_predictions/2024/pitchers/
 
 # html
 *.html
-
-# csv
-*.csv
 
 # notebooks
 *.ipynb
