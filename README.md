@@ -16,7 +16,11 @@ Fantasy baseball statistics are split between two types of players, the "Batter"
 10. Draft Away!
 
 ## Choose from these Predictions for your Fantasy Draft!
-Choose from the csvs below to view ranked projection for your fantasy baseball draft:
+* Choose from the csvs below to view ranked projection for your fantasy baseball draft:
+    - For Shallower Leagues (8,10) - (https://github.com/mattgilgo/Fantasy_Baseball/blob/main/savant_predictions/2024/final/overall_rankings_w_adp.csv)
+    - For Deeper Leagues - (https://github.com/mattgilgo/Fantasy_Baseball/blob/main/savant_predictions/2024/final/overall_rankings_w_adp_min100PA.csv)
+
+Archived:
 * Projections using top performing model/position pairing for each position:
     - Batters - (https://github.com/mattgilgo/Fantasy_Baseball/blob/main/projections/batters/2023_scaled_overall_rankings.csv)
     - Starting Pitchers - (https://github.com/mattgilgo/Fantasy_Baseball/blob/main/projections/pitchers/starters/2023_ovr_sp_rankings_20230329-163907.csv)
