@@ -152,3 +152,9 @@ savant_predictions/2024/pitchers/
 # notebooks
 *.ipynb
 .DS_Store
+
+# models
+*.xgb
+
+# yearly process README
+README_yearly_process.md
