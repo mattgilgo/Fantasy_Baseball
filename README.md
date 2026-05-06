@@ -36,7 +36,7 @@ The full draft tool (with ADP, BABIP signals, and a draft plan table) is at [yea
 4. Pull ADP from FanGraphs or FantasyPros and combine with predictions in the draft tool Excel file
 5. Sort by ADP, filter by position, and use the probability scores to find value relative to draft slot
 
-See [README_yearly_process.md](README_yearly_process.md) (gitignored) for the detailed annual workflow.
+See [README_yearly_process.md](README_yearly_process.md) for the detailed annual workflow.
 
 ## Key Stats Used
 
