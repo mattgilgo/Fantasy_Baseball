@@ -156,8 +156,8 @@ savant_predictions/2024/pitchers/
 # models
 models/
 
-# yearly process README
-README_yearly_process.md
+# xlsx
+~$*.xlsx
 
 #ds store
 *.DS_Store
