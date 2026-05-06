@@ -1,39 +1,62 @@
-# Fantasy_Baseball
-This repo highlights my first stab at developing models to predict fantasy baseball performance by individual players.
+# Fantasy Baseball Projections
 
-## My Approach
-Fantasy baseball statistics are split between two types of players, the "Batter" and the "Pitcher". Within the "Pitcher" player type, there are different stat targets for the "Starting Pitcher" and "Relief Pitcher". Three seperate datasets were needed for these, which were mostly derived from the fangraphs.com historical database. A litany of data was used to give a vast data profile of each player. Once the data was downloaded, the workflow went as followed.
+> XGBoost-powered player projections for fantasy baseball drafts, built on Baseball Savant Statcast data.
 
-1. Data Preprocessing - data cleanup, filtering, handling n/a values
-2. Data Labeling - labeling each player by primary position (1B, SP, etc.)
-3. Data Exploration - understanding stat and fantasy point production by position
-4. Splitting datasets by position
-5. Running multiple regression models against each position vs important batter/pitcher target stats
-6. Identifying important features and highest performing models for each position
-7. Making predictions based on highest performing regression model for each position
-8. Scaling predictions by position to understand player tiers and draft slot positioning
-9. Publish rankings by position and overall batter and pitcher rankings
-10. Draft Away!
+## Overview
 
-## Choose from these Predictions for your Fantasy Draft!
-* Choose from the csvs below to view ranked projection for your fantasy baseball draft:
-    - For Shallower Leagues (8,10) - (https://github.com/mattgilgo/Fantasy_Baseball/blob/main/savant_predictions/2024/final/overall_rankings_w_adp.csv)
-    - For Deeper Leagues - (https://github.com/mattgilgo/Fantasy_Baseball/blob/main/savant_predictions/2024/final/overall_rankings_w_adp_min100PA.csv)
+This repo produces per-player "great season" probability scores for batters, starting pitchers, and relief pitchers using XGBoost regression models trained on Statcast metrics. Outputs feed a yearly Excel draft guide that pairs probabilities with ADP, BABIP regression signals, and positional filters — making it easy to spot value picks and avoid overpriced busts.
 
-Archived:
-* Projections using top performing model/position pairing for each position:
-    - Batters - (https://github.com/mattgilgo/Fantasy_Baseball/blob/main/projections/batters/2023_scaled_overall_rankings.csv)
-    - Starting Pitchers - (https://github.com/mattgilgo/Fantasy_Baseball/blob/main/projections/pitchers/starters/2023_ovr_sp_rankings_20230329-163907.csv)
-    - Relief Pitchers - (https://github.com/mattgilgo/Fantasy_Baseball/blob/main/projections/pitchers/relievers/2023_ovr_rp_rankings_20230313-124854.csv)
+The system has been run annually since 2023 and is updated each spring before the draft.
 
+## Features
 
-## Model Performance Tracker
-### Team Results
-2022 Performance for teams drafted using these models:
+- Separate XGBoost models for batters, starting pitchers, and relief pitchers
+- Great-season probability score per player, scaled by position for relative comparison
+- BABIP regression signals (batter and pitcher) to flag expected improvement or decline
+- ADP integration from FanGraphs and FantasyPros for draft-slot value analysis
+- Excel draft guide with conditional formatting, positional filters, and a round-by-round draft plan section
 
-| League                    | #Teams/League | Scoring Style | Draft Position | Total Points  | League Finish |
-| ------------------------- | ------------- | ------------- | -------------- | ------------- | ------------- |
-| Doubles & Dingers E5      | 12            | H2H Category  | 6th            | TBD           | TBD           |
-| The We Back League        | 8             | H2H Points    | 7th            | TBD           | TBD           |
-| Shamrocks and Shenangians | 10            | Rotisserie    | 7th            | TBD           | TBD           |
-| Reddit League             | 10            | Rotisserie    | Auction        | TBD           | TBD           |
+## 2026 Predictions
+
+Use these CSVs directly for your draft:
+
+| Player Type | File |
+|---|---|
+| Batters (min 200 PA) | [xgboost_great_season_rankings_min200PA.csv](savant_predictions/2026/batters/xgboost_great_season_rankings_min200PA.csv) |
+| Starting Pitchers | [xgboost_great_season_rankings_only_starters.csv](savant_predictions/2026/pitchers/xgboost_great_season_rankings_only_starters.csv) |
+| All Pitchers | [xgboost_great_season_rankings_starters_and_relievers.csv](savant_predictions/2026/pitchers/xgboost_great_season_rankings_starters_and_relievers.csv) |
+
+The full draft tool (with ADP, BABIP signals, and a draft plan table) is at [yearly_draft_guides/fantasy_baseball_draft_tool_2026.xlsx](yearly_draft_guides/fantasy_baseball_draft_tool_2026.xlsx).
+
+## How It Works
+
+1. Download Statcast data from [Baseball Savant](https://baseballsavant.mlb.com/) for batters (min 200 PA), starters (min 100 IP), and relievers (min 25 IP)
+2. Load the pre-trained XGBoost models from `models/` and run predictions in `yearly_model_runs.ipynb`
+3. Pull BABIP and 3-year BABIP from FanGraphs; compute regression expectation per player
+4. Pull ADP from FanGraphs or FantasyPros and combine with predictions in the draft tool Excel file
+5. Sort by ADP, filter by position, and use the probability scores to find value relative to draft slot
+
+See [README_yearly_process.md](README_yearly_process.md) (gitignored) for the detailed annual workflow.
+
+## Key Stats Used
+
+**Batters:** K%, BB%, exit velocity, launch angle, sweet spot%, barrel rate, hard-hit%, sprint speed, zone contact rates, pull/oppo%, groundball/flyball%
+
+**Pitchers:** IP, exit velocity allowed, launch angle allowed, sweet spot% allowed, barrel rate allowed, hard-hit% allowed, zone swing/miss rates, whiff%, meatball%
+
+## Model Performance
+
+| Year | League | Format | Draft Pos | Finish |
+|---|---|---|---|---|
+| 2022 | Doubles & Dingers E5 (12-team) | H2H Category | 6th | — |
+| 2022 | The We Back League (8-team) | H2H Points | 7th | — |
+| 2022 | Shamrocks and Shenanigans (10-team) | Rotisserie | 7th | — |
+| 2022 | Reddit League (10-team) | Rotisserie | Auction | — |
+
+## Archived Predictions
+
+Earlier seasons used linear regression models (ElasticNet, Lasso, Ridge) before the switch to XGBoost. Those projections are preserved in `archive/` for reference.
+
+## License
+
+GPL-3.0 — see [LICENSE](LICENSE)
